@@ -1,0 +1,36 @@
+<div style="text-align:center;margin-left:25%;margin-right:25%;">
+<h1>Mossbee Printer</h1>
+<h4>Please enter wifi network information below.<br/>Information is stored locally on this printer only.</h4>
+<form id="wifi_settings">
+  <input type="text" name="ssid" placeholder="SSID (wifi network)..."/>
+  <input type="password" name="psk" placeholder="password..."/>
+  <button type="submit">Save</button>
+</form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+  $('#wifi_settings').submit(function(){
+    event.preventDefault();
+    $.post('/wifi_setup', {
+      data: $(this).serialize()
+    }, function(data){
+      console.log(data);
+    });
+  });
+</script>
+<style>
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+button[type=submit]{
+  width: 100%;
+  background-color: lightblue;
+  padding:1em;
+  font-size: 15px;
+}
+</style>
