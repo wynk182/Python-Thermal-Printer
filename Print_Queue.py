@@ -39,11 +39,12 @@ class Print_Queue():
             printer.feed(1)
 
         #printer.println(val['order_items'])
-        printer.println("Total: " + val['total'])
+        printer.println("Total: $" + val['total'])
         printer.feed(2)
         #print(val['order_items'])
         #print(val['name'])
         #qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
+        printer.timeoutWait()
         printer.printImage(qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id'])))
         printer.feed(2)
         #printer.qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
