@@ -27,7 +27,7 @@ class Print_Queue():
     for val in orders:
         print(val['order_items'])
         print(val['name'])
-        qrcode.make("http://localhost:3000/menus/1/orders/" + str(val['id'])).save(str(val['order_number']) + '.bmp')
+        qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id'])).save(str(val['order_number']) + '.bmp')
     # for val in json_data:
     #     qrcode.make(val['qr_url']).save(val['name'] + '.png')
 

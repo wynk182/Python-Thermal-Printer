@@ -1,14 +1,19 @@
 <div style="text-align:center;margin-left:25%;margin-right:25%;">
 <h1>Mossbee Printer</h1>
-<h4>Please enter wifi network information below.<br/>Information is stored locally on this printer only.</h4>
-<form id="wifi_settings" action="/wifi_setup" method="post">
-  <input type="text" name="ssid" placeholder="SSID (wifi network)..."/>
-  <input type="password" name="psk" placeholder="password..."/>
+<h4>Please select a menu to print orders from</h4>
+<form method="post">
+  <select id="menus" name="menu">
+    {% for menu in options %}
+      <option value="{{ menu["id"] }}">{{menu["name"]}}</option>
+    {% endfor %}
+  </select>
+  <input type="hidden" name="location" value="menu_save"/>
   <button type="submit">Save</button>
 </form>
 </div>
+<script>
 
-
+</script>
 <style>
 input {
     width: 100%;

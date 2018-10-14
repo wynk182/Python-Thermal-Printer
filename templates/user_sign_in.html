@@ -1,25 +1,15 @@
 <div style="text-align:center;margin-left:25%;margin-right:25%;">
 <h1>Mossbee Printer</h1>
 <h4>Please enter Mossbee account email and password</h4>
-<form id="user_cred">
+<form id="user_cred" method="post">
   <input type="text" name="email" placeholder="email..."/>
   <input type="password" name="password" placeholder="password..."/>
+  <input type="hidden" name="location" value="sign_in"/>
   <button type="submit">Login</button>
 </form>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script>
-  $('#user_cred').submit(function(){
-    event.preventDefault();
-    $.post('/sign_in', {
-      data: $(this).serialize()
-    }, function(data){
-      console.log(data);
-    });
-  });
-</script>
 <style>
 input {
     width: 100%;
