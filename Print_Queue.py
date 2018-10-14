@@ -35,7 +35,7 @@ class Print_Queue():
         printer.println("Item       Quantity")
         printer.feed(2)
         for item in val['order_items']:
-            printer.println(item['name'] + '       ' + item['quantity'])
+            printer.println(str(item['name']) + '       ' + str(item['quantity']))
             printer.feed(1)
 
         #printer.println(val['order_items'])
