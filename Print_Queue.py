@@ -29,12 +29,14 @@ class Print_Queue():
     # print orders
     for val in orders:
         printer.wake()
-        printer.feed(2)
+        printer.feed(1)
         printer.justify('L')
         printer.println(val['name'])
-        printer.feed(2)
+        printer.println(val['order_number'])
+        printer.println(val['created'])
+        printer.feed(1)
         printer.println("Items")
-        printer.feed(2)
+        printer.feed(1)
         for item in val['order_items']:
             printer.println(str(item['quantity']) + ' ' + str(item['name']) + ' $' + str(item['total_price']))
             printer.feed(1)
@@ -59,7 +61,7 @@ class Print_Queue():
         printer.printImage(qr.make_image(fill_color="black", back_color="white"))
         printer.justify('L')
         printer.println("-----------------------------")
-        printer.feed(5)
+        printer.feed(2)
         printer.sleep()
         #printer.qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
     # for val in json_data:
