@@ -50,8 +50,8 @@ class Print_Queue():
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
+            box_size=5,
+            border=2,
         )
         qr.add_data("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))
         printer.printImage(qr.make_image(fill_color="black", back_color="white"))
