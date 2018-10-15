@@ -35,6 +35,8 @@ class Print_Queue():
         printer.println("Order #" + str(val['order_number']))
         printer.println(val['created'])
         printer.feed(1)
+        printer.println(val['notes'])
+        printer.feed(1)
         printer.println("Items")
         printer.feed(1)
         for item in val['order_items']:
@@ -42,7 +44,7 @@ class Print_Queue():
             #printer.feed(1)
 
         #printer.println(val['order_items'])
-        printer.println(val['notes'])
+
         printer.justify('R')
         printer.println("Total: $" + val['total'])
         printer.feed(2)
@@ -55,7 +57,7 @@ class Print_Queue():
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=7,
+            box_size=5,
             border=2,
         )
         qr.add_data("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))
