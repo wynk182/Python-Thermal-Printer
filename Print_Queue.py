@@ -32,7 +32,7 @@ class Print_Queue():
         printer.feed(1)
         printer.justify('L')
         printer.println(val['name'])
-        printer.println('Order #' + str(val['order_number'])
+        printer.println("Order #" + str(val['order_number']))
         printer.println(val['created'])
         printer.feed(1)
         printer.println("Items")
