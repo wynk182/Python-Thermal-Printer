@@ -36,10 +36,11 @@ class Print_Queue():
         printer.println("Items")
         printer.feed(2)
         for item in val['order_items']:
-            printer.println(str(item['quantity']) + ' ' + str(item['name']))
+            printer.println(str(item['quantity']) + ' ' + str(item['name']) + ' $' + str(item['total_price']))
             printer.feed(1)
 
         #printer.println(val['order_items'])
+        printer.justify('R')
         printer.println("Total: $" + val['total'])
         printer.feed(2)
         printer.justify('C')
