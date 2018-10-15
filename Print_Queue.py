@@ -47,7 +47,14 @@ class Print_Queue():
         #qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
         printer.timeoutSet(2)
         printer.timeoutWait()
-        printer.printImage(qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id'])))
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))
+        printer.printImage(qr.make(fit=True))
         printer.feed(2)
         printer.sleep()
         #printer.qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
