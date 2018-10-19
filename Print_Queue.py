@@ -26,11 +26,13 @@ class Print_Queue():
     url = "http://mossbee.ngrok.io/printer/get_queue/2.json"
     auth_header = '{"access_token": "'+access_token+'"}'
     orders = send_request(auth_header, url)
-    print orders
+    # print orders
 
     printer.wake()
     for val in orders:
         print(val)
+        printer.timeoutSet(1)
+        printer.timeoutWait()
         printer.feed(1)
         printer.justify('L')
         printer.println(val['name'])
@@ -41,6 +43,8 @@ class Print_Queue():
         printer.feed(1)
         printer.println("Items")
         printer.feed(1)
+        printer.timeoutSet(1)
+        printer.timeoutWait()
         for item in val['order_items']:
             printer.println(str(item['quantity']) + ' ' + str(item['name']) + ' $' + str(item['total_price']))
 
