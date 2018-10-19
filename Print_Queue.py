@@ -28,11 +28,8 @@ class Print_Queue():
     orders = send_request(auth_header, url)
     # print orders
 
-    printer.wake()
     for val in orders:
         print(val)
-        printer.timeoutSet(1)
-        printer.timeoutWait()
         printer.feed(1)
         printer.justify('L')
         printer.println(val['name'])
@@ -43,8 +40,6 @@ class Print_Queue():
         printer.feed(1)
         printer.println("Items")
         printer.feed(1)
-        printer.timeoutSet(1)
-        printer.timeoutWait()
         for item in val['order_items']:
             printer.println(str(item['quantity']) + ' ' + str(item['name']) + ' $' + str(item['total_price']))
 
@@ -52,8 +47,6 @@ class Print_Queue():
         printer.println("Total: $" + val['total'])
         printer.feed(2)
         printer.justify('C')
-        printer.timeoutSet(1)
-        printer.timeoutWait()
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -68,10 +61,10 @@ class Print_Queue():
         printer.justify('L')
         printer.println("--------------------------------")
         printer.feed(2)
-        printer.timeoutSet(3)
-        printer.timeoutWait()
 
     printer.sleep()
+    printer.wake()
+    printer.setDefault()
         #printer.qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
     # for val in json_data:
     #     qrcode.make(val['qr_url']).save(val['name'] + '.png')
