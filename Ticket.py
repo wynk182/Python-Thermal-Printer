@@ -3,12 +3,13 @@ import urllib2
 import qrcode
 from Adafruit_Thermal import *
 
-printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
+printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 config = json.load(open('data.json'))
 
 class Ticket():
 
     def print_ticket(self, order):
+        printer.setDefault()
         printer.justify('L')
         printer.println(order['name'])
         printer.println("Order #" + str(order['order_number']))
@@ -42,4 +43,3 @@ class Ticket():
         printer.justify('L')
         printer.println("--------------------------------")
         printer.feed(2)
-        
