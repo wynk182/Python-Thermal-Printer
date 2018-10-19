@@ -10,10 +10,8 @@ class Ticket():
 
     def print_ticket(self, order):
         printer.justify('L')
-        printer.setSize('M')
         printer.println(order['name'])
         printer.println("Order #" + str(order['order_number']))
-        printer.setSize('S')
         printer.println(order['created'])
         printer.feed(1)
         printer.println(order['notes'])

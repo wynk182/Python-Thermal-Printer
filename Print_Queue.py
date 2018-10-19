@@ -6,8 +6,6 @@ from Ticket import *
 
 ticket = Ticket()
 
-printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
-
 class Print_Queue():
 
     def send_request(auth_header, url):
