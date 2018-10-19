@@ -2,7 +2,7 @@ import json
 import qrcode
 import urllib2
 from Adafruit_Thermal import *
-from Ticket import *
+import Ticket
 
 printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
