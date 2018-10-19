@@ -36,11 +36,10 @@ class Ticket():
         qr.make(fit=True)
         #print(qr.make_image(fill_color="black", back_color="white"))
         printer.println("Scan the below QR to complete")
+        printer.feed(1)
         printer.printImage(qr.make_image(fill_color="black", back_color="white"))
         printer.feed(1)
         printer.justify('L')
         printer.println("--------------------------------")
         printer.feed(2)
-        printer.sleep()
-        printer.wake()
-        printer.setDefault()
+        
