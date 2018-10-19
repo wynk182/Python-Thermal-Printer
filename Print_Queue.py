@@ -61,7 +61,7 @@ class Print_Queue():
             border=2,
         )
         qr.add_data("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))
-        printer.printImage(qr.make_image(fill_color="black", back_color="white"))
+        printer.printImage(qr.make(fill_color="black", back_color="white"))
         printer.justify('L')
         printer.println("--------------------------------")
         printer.feed(2)
