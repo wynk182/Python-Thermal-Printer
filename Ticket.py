@@ -3,7 +3,7 @@ import urllib2
 import qrcode
 from Adafruit_Thermal import *
 
-printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
+printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 config = json.load(open('data.json'))
 
 class Ticket():
