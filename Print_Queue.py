@@ -2,7 +2,9 @@ import json
 import qrcode
 import urllib2
 from Adafruit_Thermal import *
-import Ticket
+from Ticket import *
+
+ticket = Ticket()
 
 printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
@@ -30,7 +32,7 @@ class Print_Queue():
     # print orders
 
     for val in orders:
-        Ticket.print_ticket(val)
+        ticket.print_ticket(val)
 
         #printer.qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
     # for val in json_data:
