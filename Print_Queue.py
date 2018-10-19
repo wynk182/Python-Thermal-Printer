@@ -29,7 +29,7 @@ class Print_Queue():
     # print orders
 
     for val in orders:
-        print(val)
+        #print(val)
         printer.feed(1)
         printer.justify('L')
         printer.println(val['name'])
@@ -56,8 +56,8 @@ class Print_Queue():
         qr.add_data("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))
         #print(qr.make(fit=True))
         qr.make(fit=True)
-        print(qr.make_image(fill_color="black", back_color="white"))
-        #printer.printImage(qr.make_image(fill_color="black", back_color="white"))
+        #print(qr.make_image(fill_color="black", back_color="white"))
+        printer.printImage(qr.make_image(fill_color="black", back_color="white"))
         printer.justify('L')
         printer.println("--------------------------------")
         printer.feed(2)
