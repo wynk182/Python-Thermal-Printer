@@ -64,6 +64,8 @@ class Print_Queue():
         printer.justify('L')
         printer.println("--------------------------------")
         printer.feed(2)
+        printer.timeoutSet(3)
+        printer.timeoutWait()
 
     printer.sleep()
         #printer.qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
