@@ -2,6 +2,7 @@ import json
 import qrcode
 import urllib2
 from Adafruit_Thermal import *
+from Ticket import *
 
 printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
@@ -20,7 +21,7 @@ class Print_Queue():
     auth_header = '{"email": "michael@mossbee.com", "password":"123456ADMIN"}'
     # print(contents)
     json_data = send_request(auth_header, url)
-    print(json_data)
+    #print(json_data)
 
     access_token = json_data['access_token']
     url = "http://mossbee.ngrok.io/printer/get_queue/2.json"
@@ -29,42 +30,8 @@ class Print_Queue():
     # print orders
 
     for val in orders:
-        #print(val)
-        printer.feed(1)
-        printer.justify('L')
-        printer.println(val['name'])
-        printer.println("Order #" + str(val['order_number']))
-        printer.println(val['created'])
-        printer.feed(1)
-        printer.println(val['notes'])
-        printer.feed(1)
-        printer.println("Items")
-        printer.feed(1)
-        for item in val['order_items']:
-            printer.println(str(item['quantity']) + ' ' + str(item['name']) + ' $' + str(item['total_price']))
+        Ticket.print_ticket(val)
 
-        printer.justify('R')
-        printer.println("Total: $" + val['total'])
-        printer.feed(2)
-        printer.justify('C')
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=5,
-            border=2,
-        )
-        qr.add_data("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))
-        #print(qr.make(fit=True))
-        qr.make(fit=True)
-        #print(qr.make_image(fill_color="black", back_color="white"))
-        printer.printImage(qr.make_image(fill_color="black", back_color="white"))
-        printer.justify('L')
-        printer.println("--------------------------------")
-        printer.feed(2)
-
-    printer.sleep()
-    printer.wake()
-    printer.setDefault()
         #printer.qrcode.make("https://mossbee.ngrok.io/menus/1/orders/" + str(val['id']))#.save(str(val['order_number']) + '.bmp')
     # for val in json_data:
     #     qrcode.make(val['qr_url']).save(val['name'] + '.png')
