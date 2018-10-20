@@ -7,7 +7,7 @@ import qrcode
 
 printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 
-time.sleep(5)
+time.sleep(10)
 
 #printer.printImage(Image.open('gfx/logo.png'), True)
 printer.feed(2)
@@ -29,11 +29,11 @@ qr.add_data('http://' + local_ip_address + '/setup')
 qr.make(fit=True)
 printer.justify('C')
 printer.println("Scan this QR code to")
-printer.println("configure printer")
+printer.println("open printer configuraton")
 printer.feed(1)
 printer.printImage(qr.make_image(fill_color="black", back_color="white"))
 
 printer.feed(4)
-
+time.sleep(5)
 subprocess.call(["python", "router.py"])
 # while(True):
