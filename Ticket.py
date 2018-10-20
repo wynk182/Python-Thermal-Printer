@@ -2,9 +2,11 @@ import json
 import urllib2
 import qrcode
 from Adafruit_Thermal import *
+from Config import *
 
 printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
-config = json.load(open('data.json'))
+#config = json.load(open('data.json'))
+config = Config()
 
 class Ticket():
 
@@ -32,7 +34,7 @@ class Ticket():
             box_size=5,
             border=2,
         )
-        qr.add_data(config['baseURL'] + "/menus/"+config['menuID']+"/orders/" + str(order['id']))
+        qr.add_data(config.getItem('baseURL') + "/menus/"+config.getItem('menuID')+"/orders/" + str(order['id']))
         #print(qr.make(fit=True))
         qr.make(fit=True)
         #print(qr.make_image(fill_color="black", back_color="white"))
