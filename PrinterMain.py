@@ -9,7 +9,7 @@ printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 
 time.sleep(5)
 
-printer.printImage(Image.open('gfx/logo.png'), True)
+#printer.printImage(Image.open('gfx/logo.png'), True)
 printer.feed(2)
 
 # find network ip
