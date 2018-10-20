@@ -20,6 +20,6 @@ s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
 local_ip_address = s.getsockname()[0]
 
 printer.println(local_ip_address)
-printer.feed(1)
+printer.feed(4)
 
 # while(True):
