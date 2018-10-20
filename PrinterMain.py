@@ -25,7 +25,7 @@ qr = qrcode.QRCode(
     box_size=5,
     border=2,
 )
-qr.add_data(local_ip_address + '/setup')
+qr.add_data('http://' + local_ip_address + '/setup')
 qr.make(fit=True)
 printer.justify('C')
 printer.println("Scan this QR code to")
