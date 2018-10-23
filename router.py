@@ -34,15 +34,20 @@ def sign_in():
 def send_sign_in():
     if(request.form.get('location') == 'sign_in'):
         #print(request.values)
-        url = "http://localhost:3000/printer/auth.json"
+        print config.getItem('baseURL')
+        url = config.getItem('baseURL') + "/printer/auth.json"
+        print url
         auth_header = '{"email": "'+request.form.get("email")+'", "password":"'+request.form.get("password")+'"}'
         # print(contents)
         json_data = http_helper.send_request(auth_header, url)
         config.updateItem('access_token', json_data["access_token"])
-        url = "http://localhost:3000/printer/menu_options"
+        url = config.getItem('baseURL') + "/printer/menu_options"
         auth_header = '{"access_token":"'+json_data["access_token"]+'"}'
         menu_options = http_helper.send_request(auth_header, url)
         return render_template('menus.html', options=menu_options)
+    elif(request.form.get('location') == 'menu_save'):
+        config.updateItem('selectedMenu', request.form.get('menu'))
+        return "Thanks"
     else:
         return "thanks"
 
