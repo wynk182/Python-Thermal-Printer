@@ -12,7 +12,7 @@ class os_utilities():
             if line.startswith("ESSID"):
                 line=line[7:-1]
                 list += line
-                print line
+                #print line
         return list
 
     def reboot():

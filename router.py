@@ -32,13 +32,9 @@ def sign_in():
 
 @app.route("/setup", methods=['POST'])
 def send_sign_in():
-    if(request.form.get('location') == 'sign_in'):
-        #print(request.values)
-        print config.getItem('baseURL')
-        url = config.getItem('baseURL') + "/printer/auth.json"
-        print url
-        auth_header = '{"email": "'+request.form.get("email")+'", "password":"'+request.form.get("password")+'"}'
-        # print(contents)
+    if(request.form.get('location') == 'sign_in'):        
+        url = config.getItem('baseURL') + "/printer/auth.json"        
+        auth_header = '{"email": "'+request.form.get("email")+'", "password":"'+request.form.get("password")+'"}'        
         json_data = http_helper.send_request(auth_header, url)
         config.updateItem('access_token', json_data["access_token"])
         url = config.getItem('baseURL') + "/printer/menu_options"
