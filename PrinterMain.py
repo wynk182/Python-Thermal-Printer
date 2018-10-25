@@ -4,13 +4,19 @@ import subprocess, time, socket
 from PIL import Image
 from Adafruit_Thermal import *
 import qrcode
+from HttpHelper import *
+from Config import *
 
+config = Config()
+http = HttpHelper()
 printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 
 time.sleep(10)
 
 #printer.printImage(Image.open('gfx/logo.png'), True)
 printer.feed(2)
+
+#print(http.validate_connection(config.getItem('baseURL')))
 
 # find network ip
 import socket
