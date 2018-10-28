@@ -24,7 +24,9 @@ def submit_wifi():
     #print(request.form)
     config.updateItem('ssid', request.form.get('ssid'))
     config.updateItem('psk', request.form.get('psk'))
-    return render_template('thank_you.html')
+    config.writeWifiConfig()
+    #return render_template('thank_you.html')
+    return "Thanks!"
 
 @app.route("/setup", methods=['GET'])
 def sign_in():
@@ -32,9 +34,9 @@ def sign_in():
 
 @app.route("/setup", methods=['POST'])
 def send_sign_in():
-    if(request.form.get('location') == 'sign_in'):        
-        url = config.getItem('baseURL') + "/printer/auth.json"        
-        auth_header = '{"email": "'+request.form.get("email")+'", "password":"'+request.form.get("password")+'"}'        
+    if(request.form.get('location') == 'sign_in'):
+        url = config.getItem('baseURL') + "/printer/auth.json"
+        auth_header = '{"email": "'+request.form.get("email")+'", "password":"'+request.form.get("password")+'"}'
         json_data = http_helper.send_request(auth_header, url)
         config.updateItem('access_token', json_data["access_token"])
         url = config.getItem('baseURL') + "/printer/menu_options"
