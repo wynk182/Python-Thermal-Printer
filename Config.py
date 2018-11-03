@@ -2,6 +2,12 @@ import json
 
 class Config():
 
+    epValidate = "printer/validate_token"
+    epAuthorize = "printer/auth.json"
+    epMenus = "printer/menu_options"
+    epQueue = "printer/get_queue/" #menu ID
+    epSetPrinted = "printer/set_printed/" #order ID
+
     def validateItem(self, key):
         config = json.load(open('data.json'))
         return key in config

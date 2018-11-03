@@ -8,9 +8,37 @@ printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 #config = json.load(open('data.json'))
 config = Config()
 
-class Ticket():
+class Templates():
 
-    def print_ticket(self, order):
+    def wifi_setup(self):
+        print('test wifi')
+        #printer.justify('C')
+        #printer.println("Scan this QR code to")
+        #printer.println("open printer configuraton")
+        #printer.feed(1)
+        # printer.printImage('gfx/MossbeePrinter-qrcode.png')
+        #printer.feed(4)
+        #time.sleep(5)
+
+    def printer_link(self):
+        print('test login')
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=5,
+            border=2,
+        )
+        qr.add_data('http://' + ip_address + '/setup')
+        qr.make(fit=True)
+        #printer.justify('C')
+        #printer.println("Scan this QR code to")
+        #printer.println("open printer configuraton")
+        #printer.feed(1)
+        #printer.printImage(qr.make_image(fill_color="black", back_color="white"))
+        #printer.feed(4)
+        #time.sleep(5)
+        
+    def ticket(self, order):
         printer.setDefault()
         printer.justify('L')
         printer.println(order['name'])

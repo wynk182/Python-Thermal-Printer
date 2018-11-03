@@ -35,7 +35,7 @@ def sign_in():
 @app.route("/setup", methods=['POST'])
 def send_sign_in():
     if(request.form.get('location') == 'sign_in'):
-        url = config.getItem('baseURL') + "printer/auth.json"
+        url = config.getItem('baseURL') + config.epAuthorize
         auth_header = '{"email": "'+request.form.get("email")+'", "password":"'+request.form.get("password")+'"}'
         json_data = http_helper.send_request(auth_header, url)
         if json_data:
@@ -46,7 +46,7 @@ def send_sign_in():
         #auth_header = '{"access_token":"'+json_data["access_token"]+'"}'
         #menu_options = http_helper.send_request(auth_header, url)
         #return render_template('menus.html', options=menu_options)
-        
+
     elif(request.form.get('location') == 'menu_save'):
         config.updateItem('selectedMenu', request.form.get('menu'))
         return "Thanks"
@@ -55,7 +55,7 @@ def send_sign_in():
 
 @app.route("/menus", methods=['GET'])
 def menu():
-    url = config.getItem('baseURL') + "printer/menu_options"
+    url = config.getItem('baseURL') + config.epMenus
     auth_header = '{"access_token":"'+config.getItem('access_token')+'"}'
     menu_options = http_helper.send_request(auth_header, url)
     return render_template('menus.html', options=menu_options)

@@ -6,7 +6,11 @@ from PIL import Image
 import qrcode
 from HttpHelper import *
 from Config import *
+from Templates import *
+import random
+import string
 
+template = Templates()
 config = Config()
 http = HttpHelper()
 #printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
@@ -15,6 +19,15 @@ http = HttpHelper()
 
 #printer.printImage(Image.open('gfx/logo.png'), True)
 #printer.feed(2)
+if not config.validateItem('printer_token'):
+    random = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(32)])
+    if not open('secret_printer_key'):
+        with open('secret_printer_key', 'w') as f:
+            f.write(random)
+    else:
+        with open('secret_printer_key', 'r') as f:
+            random = f.readline()
+    config.updateItem('printer_token', random)
 
 #print(http.validate_connection(config.getItem('baseURL')))
 
@@ -32,7 +45,7 @@ else:
         local_ip_address = s.getsockname()[0]
         print(local_ip_address)
         if config.validateItem('access_token'):
-            url = config.getItem('baseURL') + "printer/validate_token"
+            url = config.getItem('baseURL') + config.epValidate
             auth_header = '{"access_token":"'+config.getItem('access_token')+'"}'
             response = http.send_request(auth_header,url)
             if response:
@@ -40,38 +53,10 @@ else:
             else:
                 print('invalid')
         # self.printLoginURL(local_ip_address)
+        # template.printer_link()
     else:
         print("Connection Error, print wifi setup link")
         # self.printWifiURL()
-
-def printLoginURL(self, ip_address):
-    print('test login')
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=5,
-        border=2,
-    )
-    qr.add_data('http://' + ip_address + '/setup')
-    qr.make(fit=True)
-    #printer.justify('C')
-    #printer.println("Scan this QR code to")
-    #printer.println("open printer configuraton")
-    #printer.feed(1)
-    #printer.printImage(qr.make_image(fill_color="black", back_color="white"))
-    #printer.feed(4)
-    #time.sleep(5)
-
-def printWifiURL(self):
-    print('test wifi')
-    #printer.justify('C')
-    #printer.println("Scan this QR code to")
-    #printer.println("open printer configuraton")
-    #printer.feed(1)
-    # printer.printImage('gfx/MossbeePrinter-qrcode.png')
-    #printer.feed(4)
-    #time.sleep(5)
+        # template.wifi_setup()
 
 subprocess.call(["python", "router.py"])
-
-# while(True):
