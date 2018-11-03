@@ -1,4 +1,9 @@
-<div style="text-align:center;margin-left:25%;margin-right:25%;">
+<meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}"/>
+
+<div class="container">
 <h1>Mossbee Printer</h1>
 <h4>Please enter wifi network information below.<br/>Information is stored locally on this printer only.</h4>
 <form id="wifi_settings" action="/wifi_setup" method="post">
@@ -7,19 +12,3 @@
   <button type="submit">Save</button>
 </form>
 </div>
-
-
-<style>
-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-button[type=submit]{
-  width: 100%;
-  background-color: lightblue;
-  padding:1em;
-  font-size: 15px;
-}
-</style>

@@ -1,0 +1,29 @@
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: solid lightgray;
+    border-radius: 10px;
+    font-size: 20;
+}
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: solid lightgray;
+  border-radius: 10px;
+  font-size: 20;
+}
+button[type=submit]{
+  width: 100%;
+  background-color: goldenrod;
+  padding: 12px 20px;
+  font-size: 20;
+  border-radius: 10px;
+}
+.container{
+  text-align:center;
+  margin:0 atuo;
+}

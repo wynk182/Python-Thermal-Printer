@@ -27,11 +27,18 @@ else:
     if http.pingURL(config.getItem("baseURL")) == 200:
         print("Connected!")
         import socket
-
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
         local_ip_address = s.getsockname()[0]
         print(local_ip_address)
+        if config.validateItem('access_token'):
+            url = config.getItem('baseURL') + "printer/validate_token"
+            auth_header = '{"access_token":"'+config.getItem('access_token')+'"}'
+            response = http.send_request(auth_header,url)
+            if response:
+                print('valid')
+            else:
+                print('invalid')
         # self.printLoginURL(local_ip_address)
     else:
         print("Connection Error, print wifi setup link")
