@@ -20,18 +20,17 @@ class Templates():
         printer.feed(4)
 
     def printer_link(self):
-        print('test login')
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=5,
-            border=2,
-        )
-        qr.add_data('http://' + config.getItem('IP') + "/setup" #ip_address + '/setup')
-        qr.make(fit=True)
         printer.justify('C')
         printer.println("Scan this QR code to")
         printer.println("open printer configuraton")
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=8,
+            border=2,
+        )
+        qr.add_data('http://' + config.getItem('IP') + "/setup") #ip_address + '/setup')
+        qr.make(fit=True)
         printer.feed(1)
         printer.printImage(qr.make_image(fill_color="black", back_color="white"))
         printer.feed(4)
@@ -57,7 +56,7 @@ class Templates():
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=5,
+            box_size=8,
             border=2,
         )
         qr.add_data(config.getItem('baseURL') + "/menus/"+config.getItem('menuID')+"/orders/" + str(order['id']))
