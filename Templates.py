@@ -16,7 +16,7 @@ class Templates():
         printer.println("Scan this QR code to")
         printer.println("open printer configuraton")
         printer.feed(1)
-        printer.printImage('gfx/MossbeePrinter-qrcode.png')
+        printer.printImage(open('gfx/MossbeePrinter-qrcode.png'))
         printer.feed(4)
 
     def printer_link(self):
@@ -26,7 +26,7 @@ class Templates():
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=8,
+            box_size=6,
             border=2,
         )
         qr.add_data('http://' + config.getItem('IP') + "/setup") #ip_address + '/setup')
@@ -56,7 +56,7 @@ class Templates():
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=8,
+            box_size=6,
             border=2,
         )
         qr.add_data(config.getItem('baseURL') + "/menus/"+config.getItem('menuID')+"/orders/" + str(order['id']))
