@@ -15,7 +15,7 @@ config = Config()
 http = HttpHelper()
 #printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 
-#time.sleep(10)
+time.sleep(10)
 
 #printer.printImage(Image.open('gfx/logo.png'), True)
 #printer.feed(2)

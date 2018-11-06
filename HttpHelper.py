@@ -13,11 +13,9 @@ class HttpHelper():
             if 'error' in response:
                 return None
             return response
-        except HTTPError as e:
+        except Exception as e:
             return None
-        except URLError as e:
-            return None
-            
+
     def pingURL(self, url):
         try:
             return urllib2.urlopen(url).getcode()
