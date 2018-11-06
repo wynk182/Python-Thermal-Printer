@@ -38,12 +38,13 @@ if config.loadWifiConfig() is None:
     #print("No Wifi config, print wifi setup link!")
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
-        print("Connected!")
+        #print("Connected!")
         import socket
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
         local_ip_address = s.getsockname()[0]
-        print(local_ip_address)
+        #print(local_ip_address)
+        config.updateItem('IP', local_ip_address)
         if config.validateItem('access_token'):
             url = config.getItem('baseURL') + config.epValidate
             auth_header = '{"access_token":"'+config.getItem('access_token')+'"}'
@@ -51,12 +52,13 @@ else:
             if response:
                 print('valid')
             else:
-                print('invalid')
+                #print('invalid')
+                template.printer_link()
         # self.printLoginURL(local_ip_address)
         # template.printer_link()
     else:
-        print("Connection Error, print wifi setup link")
+        # print("Connection Error, print wifi setup link")
         # self.printWifiURL()
-        # template.wifi_setup()
+        template.wifi_setup()
 
 subprocess.call(["python", "router.py"])

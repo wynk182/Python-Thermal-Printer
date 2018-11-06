@@ -11,14 +11,13 @@ config = Config()
 class Templates():
 
     def wifi_setup(self):
-        print('test wifi')
-        #printer.justify('C')
-        #printer.println("Scan this QR code to")
-        #printer.println("open printer configuraton")
-        #printer.feed(1)
-        # printer.printImage('gfx/MossbeePrinter-qrcode.png')
-        #printer.feed(4)
-        #time.sleep(5)
+        #print('test wifi')
+        printer.justify('C')
+        printer.println("Scan this QR code to")
+        printer.println("open printer configuraton")
+        printer.feed(1)
+        printer.printImage('gfx/MossbeePrinter-qrcode.png')
+        printer.feed(4)
 
     def printer_link(self):
         print('test login')
@@ -28,16 +27,15 @@ class Templates():
             box_size=5,
             border=2,
         )
-        qr.add_data('http://' + ip_address + '/setup')
+        qr.add_data('http://' + config.getItem('IP') + "/setup" #ip_address + '/setup')
         qr.make(fit=True)
-        #printer.justify('C')
-        #printer.println("Scan this QR code to")
-        #printer.println("open printer configuraton")
-        #printer.feed(1)
-        #printer.printImage(qr.make_image(fill_color="black", back_color="white"))
-        #printer.feed(4)
-        #time.sleep(5)
-        
+        printer.justify('C')
+        printer.println("Scan this QR code to")
+        printer.println("open printer configuraton")
+        printer.feed(1)
+        printer.printImage(qr.make_image(fill_color="black", back_color="white"))
+        printer.feed(4)
+
     def ticket(self, order):
         printer.setDefault()
         printer.justify('L')
