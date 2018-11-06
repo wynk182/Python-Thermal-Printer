@@ -38,7 +38,7 @@ if config.loadWifiConfig() is None:
     #print("No Wifi config, print wifi setup link!")
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
-        #print("Connected!")
+        print("Connected!")
         import socket
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
@@ -57,7 +57,7 @@ else:
         # self.printLoginURL(local_ip_address)
         # template.printer_link()
     else:
-        # print("Connection Error, print wifi setup link")
+        print("Connection Error, print wifi setup link")
         # self.printWifiURL()
         template.wifi_setup()
 
