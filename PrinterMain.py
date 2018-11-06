@@ -37,7 +37,7 @@ if config.loadWifiConfig() is None:
         config.writeWifiConfig()
     #print("No Wifi config, print wifi setup link!")
 else:
-    if http.pingURL(config.getItem("baseURL")) == 200:
+    if http.pingURL(config.getItem("baseURL")):
         print("Connected!")
         import socket
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
