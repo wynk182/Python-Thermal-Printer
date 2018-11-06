@@ -24,7 +24,7 @@ class Templates():
         qr.add_data("WIFI:S:MossbeeTest;T:WPA2;P:@mossbee_;H:false;") #ip_address + '/setup')
         qr.make(fit=True)
         printer.feed(1)
-        #printer.printImage(open('gfx/MossbeePrinter-qrcode.png'))
+        printer.printImage(qr.make_image(fill_color="black", back_color="white"))
         printer.feed(4)
 
     def printer_link(self):
