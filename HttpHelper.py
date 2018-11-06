@@ -11,10 +11,10 @@ class HttpHelper():
             request.add_header("Authorization", auth_header)
             response = json.loads(urllib2.urlopen(request).read())
             if 'error' in response:
-                return None
+                return 500
             return response
         except Exception as e:
-            return None
+            return 500
 
     def pingURL(self, url):
         try:
