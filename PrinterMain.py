@@ -16,7 +16,8 @@ http = HttpHelper()
 #printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 
 time.sleep(10)
-
+subprocess.call(["sudo","service", "hostapd", "stop"])
+subprocess.call(["sudo","service", "dnsmasq", "stop"])
 #printer.printImage(Image.open('gfx/logo.png'), True)
 #printer.feed(2)
 if not config.validateItem('printer_token'):
