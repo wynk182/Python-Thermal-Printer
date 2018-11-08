@@ -25,7 +25,7 @@ class Config():
     def writeWifiConfig(self):
         config = json.load(open('data.json'))
         wpa_file = ""
-        with open('wpa_supplicant.conf') as file:
+        with open('/etc/wpa_supplicant/wpa_supplicant.conf') as file:
             for line in file:
                 if "network" in line: break
                 wpa_file += line
@@ -37,7 +37,7 @@ class Config():
         is_network_block = False
         network_block = ""
         # TODO add home path to wpa conf file
-        with open('wpa_supplicant.conf') as file:
+        with open('/etc/wpa_supplicant/wpa_supplicant.conf') as file:
             for line in file:
                 line = line.rstrip()
                 if not is_network_block:
