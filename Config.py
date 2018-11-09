@@ -30,7 +30,7 @@ class Config():
                 if "network" in line: break
                 wpa_file += line
         wpa_file += "network={\n ssid=\""+config['ssid']+"\"\n psk=\""+config['psk']+"\"\n}"
-        with open('wpa_supplicant.conf', 'w') as f:
+        with open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w') as f:
             f.write(wpa_file)
 
     def loadWifiConfig(self):
@@ -45,9 +45,10 @@ class Config():
                 if not is_network_block: continue
                 is_network_block = not "}" in line
                 network_block += line
-        return self.parseNetworkString(network_block)
+        #return self.parseNetworkString(network_block)
+        return None
 
-    def parseNetworkString(self,network_string):
-        if not network_string: return None
-        json_string = json.loads(network_string.replace("network=","").replace("=","\":").replace(" p",",\"p").replace(" s","\"s"))
-        return json_string
+    #def parseNetworkString(self,network_string):
+    #    if not network_string: return None
+    #    json_string = json.loads(network_string.replace("network=","").replace("=","\":").replace(" p",",\"p").replace(" s","\"s"))
+    #    return json_string
