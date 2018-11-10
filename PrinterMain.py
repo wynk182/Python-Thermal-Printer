@@ -42,11 +42,13 @@ if config.loadWifiConfig() is None:
         subprocess.call(["sudo","service","networking","restart"])
         time.sleep(5)
         if http.pingURL(config.getItem("baseURL")) == 200:
+            subprocess.call(["git","pull"])
             boot.CheckConnection()
         #subprocess.call(["sudo","reboot"])
     #print("No Wifi config, print wifi setup link!")
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
+        subprocess.call(["git","pull"])
         boot.CheckConnection()
         # self.printLoginURL(local_ip_address)
         # template.printer_link()
