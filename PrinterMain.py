@@ -7,12 +7,14 @@ import qrcode
 from HttpHelper import *
 from Config import *
 from Templates import *
+from BootProcess import *
 import random
 import string
 
 template = Templates()
 config = Config()
 http = HttpHelper()
+boot = BootProcess()
 #printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
 
 time.sleep(5)
@@ -37,26 +39,15 @@ if config.loadWifiConfig() is None:
     if config.validateItem('ssid'):
         config.writeWifiConfig()
         subprocess.call(["sudo","cp","interfaces.normal","/etc/network/interfaces"])
-        subprocess.call(["sudo","reboot"])
+        subprocess.call(["sudo","service","networking","restart"])
+        time.sleep(5)
+        if http.pingURL(config.getItem("baseURL")) == 200:
+            boot.CheckConnection()
+        #subprocess.call(["sudo","reboot"])
     #print("No Wifi config, print wifi setup link!")
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
-        print("Connected!")
-        import socket
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
-        local_ip_address = s.getsockname()[0]
-        #print(local_ip_address)
-        config.updateItem('IP', local_ip_address)
-        if config.validateItem('access_token'):
-            url = config.getItem('baseURL') + config.epValidate
-            auth_header = '{"access_token":"'+config.getItem('access_token')+'"}'
-            response = http.send_request(auth_header,url)
-            if response:
-                print('valid')
-            else:
-                #print('invalid')
-                template.printer_link()
+        boot.CheckConnection()
         # self.printLoginURL(local_ip_address)
         # template.printer_link()
     else:
