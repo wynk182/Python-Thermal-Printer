@@ -7,7 +7,7 @@ class BootProcess():
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
         local_ip_address = s.getsockname()[0]
-        #print(local_ip_address)
+        print(local_ip_address)
         config.updateItem('IP', local_ip_address)
         if config.validateItem('access_token'):
             url = config.getItem('baseURL') + config.epValidate
