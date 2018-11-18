@@ -37,7 +37,7 @@ class Templates():
             box_size=6,
             border=2,
         )
-        qr.add_data('http://' + config.getItem('IP') + "/setup") #ip_address + '/setup')
+        qr.add_data(config.getItem('baseURL') + 'printer/link/' + config.getItem('printer_token')) #ip_address + '/setup')
         qr.make(fit=True)
         printer.feed(1)
         printer.printImage(qr.make_image(fill_color="black", back_color="white"))

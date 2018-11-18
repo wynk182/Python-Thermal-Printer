@@ -49,7 +49,9 @@ if config.loadWifiConfig() is None:
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
         subprocess.call(["git","pull"])
-        boot.CheckConnection()
+        time.sleep(2)
+        template.printer_link()
+        # boot.CheckConnection()
         # self.printLoginURL(local_ip_address)
         # template.printer_link()
     else:
