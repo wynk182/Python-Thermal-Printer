@@ -34,37 +34,20 @@ if not config.validateItem('printer_token'):
 
 #print(http.validate_connection(config.getItem('baseURL')))
 
-# find network ip
-if config.loadWifiConfig() is None:
-    if config.validateItem('ssid'):
-        config.writeWifiConfig()
-        subprocess.call(["sudo","cp","interfaces.normal","/etc/network/interfaces"])
-        subprocess.call(["sudo","service","networking","restart"])
-        time.sleep(5)
-        if http.pingURL(config.getItem("baseURL")) == 200:
-            print('printer_link')
-            template.printer_link()
-        else:
-            print("Connection Error, print wifi setup link")
-            subprocess.call(["sudo","cp","interfaces.captive","/etc/network/interfaces"])
-            subprocess.call(["sudo","service","networking","restart"])
-            subprocess.call(["sudo","service", "hostapd", "start"])
-            subprocess.call(["sudo","service", "dnsmasq", "start"])
-            subprocess.call(["sudo","service", "hostapd", "stop"])
-            subprocess.call(["sudo","nodogsplash"])
-            template.wifi_setup()
+if http.pingURL(config.getItem("baseURL")) == 200:
+    print('printer_link')
+    template.printer_link()
 else:
-    if http.pingURL(config.getItem("baseURL")) == 200:
-        print('printer_link')
-        template.printer_link()
-    else:
-        print("Connection Error, print wifi setup link")
-        subprocess.call(["sudo","cp","interfaces.captive","/etc/network/interfaces"])
-        subprocess.call(["sudo","service","networking","restart"])
-        subprocess.call(["sudo","service", "hostapd", "start"])
-        subprocess.call(["sudo","service", "dnsmasq", "start"])
-        subprocess.call(["sudo","service", "hostapd", "stop"])
-        subprocess.call(["sudo","nodogsplash"])
-        template.wifi_setup()
+    print("Connection Error, print wifi setup link")
+    subprocess.call(["sudo","cp","interfaces.captive","/etc/network/interfaces"])
+    subprocess.call(["sudo","service","networking","restart"])
+    subprocess.call(["sudo","service", "hostapd", "start"])
+    subprocess.call(["sudo","service", "dnsmasq", "start"])
+    subprocess.call(["sudo","service", "hostapd", "stop"])
+    subprocess.call(["sudo","nodogsplash"])
+    template.wifi_setup()
+
+# find network ip
+
 
 # subprocess.call(["python", "router.py"])
