@@ -42,21 +42,21 @@ if config.loadWifiConfig() is None:
         subprocess.call(["sudo","service","networking","restart"])
         time.sleep(5)
         if http.pingURL(config.getItem("baseURL")) == 200:
-            subprocess.call(["git","pull"])
-            boot.CheckConnection()
-        #subprocess.call(["sudo","reboot"])
-    #print("No Wifi config, print wifi setup link!")
+            template.printer_link()
+        else:
+            print("Connection Error, print wifi setup link")
+            subprocess.call(["sudo","cp","interfaces.captive","/etc/network/interfaces"])
+            subprocess.call(["sudo","service","networking","restart"])
+            subprocess.call(["sudo","service", "hostapd", "start"])
+            subprocess.call(["sudo","service", "dnsmasq", "start"])
+            subprocess.call(["sudo","service", "hostapd", "stop"])
+            subprocess.call(["sudo","nodogsplash"])
+            template.wifi_setup()    
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
-        subprocess.call(["git","pull"])
-        time.sleep(2)
         template.printer_link()
-        # boot.CheckConnection()
-        # self.printLoginURL(local_ip_address)
-        # template.printer_link()
     else:
         print("Connection Error, print wifi setup link")
-        # self.printWifiURL()
         subprocess.call(["sudo","cp","interfaces.captive","/etc/network/interfaces"])
         subprocess.call(["sudo","service","networking","restart"])
         subprocess.call(["sudo","service", "hostapd", "start"])
