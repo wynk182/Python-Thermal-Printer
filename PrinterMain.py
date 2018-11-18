@@ -51,7 +51,7 @@ if config.loadWifiConfig() is None:
             subprocess.call(["sudo","service", "dnsmasq", "start"])
             subprocess.call(["sudo","service", "hostapd", "stop"])
             subprocess.call(["sudo","nodogsplash"])
-            template.wifi_setup()    
+            template.wifi_setup()
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
         template.printer_link()
@@ -65,4 +65,4 @@ else:
         subprocess.call(["sudo","nodogsplash"])
         template.wifi_setup()
 
-subprocess.call(["python", "router.py"])
+# subprocess.call(["python", "router.py"])
