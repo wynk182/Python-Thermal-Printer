@@ -42,6 +42,7 @@ if config.loadWifiConfig() is None:
         subprocess.call(["sudo","service","networking","restart"])
         time.sleep(5)
         if http.pingURL(config.getItem("baseURL")) == 200:
+            print('printer_link')
             template.printer_link()
         else:
             print("Connection Error, print wifi setup link")
@@ -54,6 +55,7 @@ if config.loadWifiConfig() is None:
             template.wifi_setup()
 else:
     if http.pingURL(config.getItem("baseURL")) == 200:
+        print('printer_link')
         template.printer_link()
     else:
         print("Connection Error, print wifi setup link")
